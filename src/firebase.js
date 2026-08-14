@@ -11,6 +11,13 @@ import {
   child,
   serverTimestamp 
 } from "firebase/database";
+import { 
+  getAuth, 
+  onAuthStateChanged, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut 
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB3JFhrBA8NhUKa0cwchGQeusjMn9ZelwM",
@@ -26,10 +33,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const auth = getAuth(app);
 
 export { 
   app, 
   db, 
+  auth, 
   ref, 
   set, 
   push, 
@@ -38,6 +47,10 @@ export {
   remove, 
   get, 
   child, 
-  serverTimestamp 
+  serverTimestamp,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut 
 };
 export default db;

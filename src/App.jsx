@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { 
   db, 
+  auth, 
   ref, 
   set, 
   push, 
   onValue, 
   update, 
-  remove 
+  remove,
+  onAuthStateChanged,
+  signOut 
 } from './firebase';
 
+import Login from './components/Login';
 import Header from './components/Header';
 import MatchControlBar from './components/MatchControlBar';
 import PossessionBar from './components/PossessionBar';
@@ -23,6 +27,10 @@ import VideoSyncModal from './components/VideoSyncModal';
 import MatchManagerModal from './components/MatchManagerModal';
 
 export default function App() {
+  // Auth State
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
   // Navigation & Modals
   const [activeTab, setActiveTab] = useState('pro'); // 'pro' (Photo 2) or 'quick' (Photo 1)
   const [isStatsOpen, setIsStatsOpen] = useState(false);
@@ -48,8 +56,18 @@ export default function App() {
   const [markerPos, setMarkerPos] = useState(null);
   const [selectedPhase, setSelectedPhase] = useState(null);
 
+  // 0. Firebase Auth Listener
+  useEffect(() => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setAuthLoading(false);
+    });
+    return () => unsubscribeAuth();
+  }, []);
+
   // 1. Firebase Listeners: Matches List
   useEffect(() => {
+    if (!user) return;
     const matchesRef = ref(db, 'matches');
     const unsubscribe = onValue(
       matchesRef,
@@ -80,7 +98,7 @@ export default function App() {
     );
 
     return () => unsubscribe();
-  }, [currentMatchId]);
+  }, [user, currentMatchId]);
 
   // Initial match creator
   const createInitialMatch = useCallback(async () => {
@@ -368,6 +386,31 @@ export default function App() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error('Error signing out:', err);
+    }
+  };
+
+  if (authLoading) {
+    return (
+      <div className="login-screen">
+        <div className="login-card">
+          <div className="login-brand">
+            <div className="brand-logo">FT</div>
+            <h1 className="login-title">Cargando…</h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Login />;
+  }
+
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* 1. Top Navbar */}
@@ -380,6 +423,8 @@ export default function App() {
         onOpenVideo={() => setIsVideoOpen(true)}
         isOnline={isOnline}
         onUndoLastEvent={handleUndoLastEvent}
+        userEmail={user.email}
+        onLogout={handleLogout}
       />
 
       {/* 2. Match Control Bar (Period, Stopwatch, Live Score) */}

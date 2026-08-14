@@ -8,7 +8,9 @@ export default function Header({
   onOpenStats,
   onOpenVideo,
   isOnline,
-  onUndoLastEvent
+  onUndoLastEvent,
+  userEmail,
+  onLogout
 }) {
   return (
     <header className="app-header">
@@ -79,6 +81,20 @@ export default function Header({
         >
           ⚙ Partidos
         </button>
+
+        {/* User Session */}
+        <div className="user-session">
+          <span className="user-email" title={userEmail}>
+            {userEmail}
+          </span>
+          <button
+            className="btn-sm btn-secondary"
+            onClick={onLogout}
+            title="Cerrar sesión"
+          >
+            Salir
+          </button>
+        </div>
       </div>
     </header>
   );
