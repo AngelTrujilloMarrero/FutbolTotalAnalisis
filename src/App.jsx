@@ -35,7 +35,7 @@ export default function App() {
   const [ocasionCount, setOcasionCount] = useState(0);
   const [selectedPlayer, setSelectedPlayer] = useState('');
   const [playerStatus, setPlayerStatus] = useState('titular');
-  const [players, setPlayers] = useState(Array(22).fill({ name: 'JUAN', status: 'titular' }));
+  const [players, setPlayers] = useState(Array(23).fill({ name: 'JUAN', status: 'titular' }));
 
   useEffect(() => {
     if (!user) return;
@@ -391,8 +391,9 @@ export default function App() {
                 <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
                   {/* Columna izquierda */}
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {players.slice(0, 11).map((p, i) => (
-                      <div key={i} style={{ display: 'flex', gap: '0.5rem' }}>
+                    {players.slice(0, 12).map((p, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <span style={{ color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.8rem', minWidth: '20px', textAlign: 'right' }}>{i + 1}</span>
                         <select
                           value={p.name}
                           onChange={(e) => {
@@ -451,13 +452,14 @@ export default function App() {
                   </div>
                   {/* Columna derecha */}
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                    {players.slice(11, 22).map((p, i) => (
-                      <div key={i + 11} style={{ display: 'flex', gap: '0.5rem' }}>
+                    {players.slice(12, 23).map((p, i) => (
+                      <div key={i + 12} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <span style={{ color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.8rem', minWidth: '20px', textAlign: 'right' }}>{i + 13}</span>
                         <select
                           value={p.name}
                           onChange={(e) => {
                             const newPlayers = [...players];
-                            newPlayers[i + 11] = { ...newPlayers[i + 11], name: e.target.value };
+                            newPlayers[i + 12] = { ...newPlayers[i + 12], name: e.target.value };
                             setPlayers(newPlayers);
                           }}
                           style={{
@@ -484,7 +486,7 @@ export default function App() {
                           value={p.status}
                           onChange={(e) => {
                             const newPlayers = [...players];
-                            newPlayers[i + 11] = { ...newPlayers[i + 11], status: e.target.value };
+                            newPlayers[i + 12] = { ...newPlayers[i + 12], status: e.target.value };
                             setPlayers(newPlayers);
                           }}
                           style={{
