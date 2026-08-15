@@ -31,6 +31,7 @@ export default function App() {
   const [centroDerechaCount, setCentroDerechaCount] = useState(0);
   const [centroIzquierdaCount, setCentroIzquierdaCount] = useState(0);
   const [cornerIzquierdaCount, setCornerIzquierdaCount] = useState(0);
+  const [cornerDerechaCount, setCornerDerechaCount] = useState(0);
   const [fueraCount, setFueraCount] = useState(0);
   const [blocajeCount, setBlocajeCount] = useState(0);
   const [despejeDefensaCount, setDespejeDefensaCount] = useState(0);
@@ -703,6 +704,42 @@ export default function App() {
                     textAlign: 'center'
                   }}>
                     {cornerIzquierdaCount}
+                  </span>
+                </button>
+              )}
+              {activeTab === 'acciones' && (
+                <button
+                  onClick={() => {
+                    setCornerDerechaCount(cornerDerechaCount + 1);
+                    setActiveTab('finalizaciones');
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    background: '#ec4899',
+                    color: '#ffffff',
+                    fontWeight: 900,
+                    fontSize: '0.95rem',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '12px',
+                    minWidth: '250px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}
+                >
+                  <span>CORNER DERECHA</span>
+                  <span style={{
+                    background: '#000000',
+                    color: '#ec4899',
+                    fontWeight: 900,
+                    fontSize: '1rem',
+                    padding: '0.2rem 0.7rem',
+                    borderRadius: '8px',
+                    minWidth: '30px',
+                    textAlign: 'center'
+                  }}>
+                    {cornerDerechaCount}
                   </span>
                 </button>
               )}
