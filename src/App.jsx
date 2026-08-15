@@ -504,7 +504,7 @@ export default function App() {
                       letterSpacing: '0.05em'
                     }}
                   >
-                    <span>PENAL FUERA</span>
+                    <span>PENAL + FUERA</span>
                     <span style={{
                       background: '#ffffff',
                       color: '#16a34a',
