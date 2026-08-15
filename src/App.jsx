@@ -21,6 +21,7 @@ export default function App() {
   const [matches, setMatches] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [currentMatch, setCurrentMatch] = useState(null);
+  const [activeTab, setActiveTab] = useState('acciones');
   const [tiroDerechaCount, setTiroDerechaCount] = useState(0);
 
   useEffect(() => {
@@ -144,7 +145,36 @@ export default function App() {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button className="btn-sm btn-secondary" onClick={handleBackToList} style={{ fontSize: '1rem' }}>←</button>
-            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#ffffff' }}>ACCIONES</span>
+            <button
+              onClick={() => setActiveTab('acciones')}
+              style={{
+                fontWeight: 800,
+                fontSize: '1.15rem',
+                color: activeTab === 'acciones' ? '#ffffff' : '#64748b',
+                borderBottom: activeTab === 'acciones' ? '2px solid #ffffff' : '2px solid transparent',
+                paddingBottom: '0.2rem',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              ACCIONES
+            </button>
+            <button
+              onClick={() => setActiveTab('finalizaciones')}
+              style={{
+                fontWeight: 800,
+                fontSize: '1.15rem',
+                color: activeTab === 'finalizaciones' ? '#ffffff' : '#64748b',
+                borderBottom: activeTab === 'finalizaciones' ? '2px solid #ffffff' : '2px solid transparent',
+                paddingBottom: '0.2rem',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              FINALIZACIONES
+            </button>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
@@ -189,37 +219,43 @@ export default function App() {
               flexDirection: 'column',
               gap: '1rem'
             }}>
-              <button
-                onClick={() => setTiroDerechaCount(tiroDerechaCount + 1)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  background: '#eab308',
-                  color: '#000000',
-                  fontWeight: 900,
-                  fontSize: '0.95rem',
-                  padding: '0.8rem 1.5rem',
-                  borderRadius: '12px',
-                  minWidth: '250px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em'
-                }}
-              >
-                <span>TIRO DERECHA</span>
-                <span style={{
-                  background: '#000000',
-                  color: '#eab308',
-                  fontWeight: 900,
-                  fontSize: '1rem',
-                  padding: '0.2rem 0.7rem',
-                  borderRadius: '8px',
-                  minWidth: '30px',
-                  textAlign: 'center'
-                }}>
-                  {tiroDerechaCount}
-                </span>
-              </button>
+              {activeTab === 'acciones' ? (
+                <button
+                  onClick={() => setTiroDerechaCount(tiroDerechaCount + 1)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    background: '#eab308',
+                    color: '#000000',
+                    fontWeight: 900,
+                    fontSize: '0.95rem',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '12px',
+                    minWidth: '250px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}
+                >
+                  <span>TIRO DERECHA</span>
+                  <span style={{
+                    background: '#000000',
+                    color: '#eab308',
+                    fontWeight: 900,
+                    fontSize: '1rem',
+                    padding: '0.2rem 0.7rem',
+                    borderRadius: '8px',
+                    minWidth: '30px',
+                    textAlign: 'center'
+                  }}>
+                    {tiroDerechaCount}
+                  </span>
+                </button>
+              ) : (
+                <div style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 600 }}>
+                  FINALIZACIONES — en construcción
+                </div>
+              )}
             </div>
           </div>
         </main>
