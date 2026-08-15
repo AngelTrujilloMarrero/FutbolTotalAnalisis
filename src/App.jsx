@@ -230,7 +230,7 @@ export default function App() {
               <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#38bdf8' }}>{currentMatch.homeTeam}</span>
               <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#334155' }}>vs</span>
               <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f87171' }}>{currentMatch.awayTeam}</span>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
                 JORNADA {currentMatch.matchday}
               </span>
               {activeTab === 'alineacion' && (
@@ -393,7 +393,7 @@ export default function App() {
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {players.slice(0, 12).map((p, i) => (
                       <div key={i} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                        <span style={{ color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.8rem', minWidth: '20px', textAlign: 'right' }}>{i + 1}</span>
+                        <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '0.8rem', minWidth: '20px', textAlign: 'right' }}>{i + 1}</span>
                         <select
                           value={p.name}
                           onChange={(e) => {
@@ -454,7 +454,7 @@ export default function App() {
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {players.slice(12, 23).map((p, i) => (
                       <div key={i + 12} style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                        <span style={{ color: 'var(--text-muted)', fontWeight: 700, fontSize: '0.8rem', minWidth: '20px', textAlign: 'right' }}>{i + 13}</span>
+                        <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '0.8rem', minWidth: '20px', textAlign: 'right' }}>{i + 13}</span>
                         <select
                           value={p.name}
                           onChange={(e) => {
@@ -635,9 +635,9 @@ export default function App() {
                   }}>
                     <div style={{ flex: 1 }}>
                       <span style={{ fontWeight: 700, color: '#38bdf8' }}>{m.homeTeam}</span>
-                      <span style={{ margin: '0 0.4rem', color: 'var(--text-muted)', fontWeight: 700 }}>vs</span>
+                      <span style={{ margin: '0 0.4rem', color: '#ffffff', fontWeight: 700 }}>vs</span>
                       <span style={{ fontWeight: 700, color: '#f87171' }}>{m.awayTeam}</span>
-                      <span style={{ marginLeft: '0.75rem', fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 600 }}>
+                      <span style={{ marginLeft: '0.75rem', fontSize: '0.75rem', color: '#ffffff', fontWeight: 600 }}>
                         J{m.matchday}
                       </span>
                     </div>
