@@ -36,6 +36,7 @@ export default function App() {
   const [selectedPlayer, setSelectedPlayer] = useState('');
   const [playerStatus, setPlayerStatus] = useState('titular');
   const [players, setPlayers] = useState(Array(23).fill({ name: 'JUAN', status: '-' }));
+  const [alineacionError, setAlineacionError] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -116,6 +117,16 @@ export default function App() {
 
   const handleBackToList = () => {
     setCurrentMatch(null);
+  };
+
+  const handleAceptar = () => {
+    const titulares = players.filter(p => p.status === 'titular').length;
+    if (titulares !== 11) {
+      setAlineacionError(true);
+      setTimeout(() => setAlineacionError(false), 3000);
+      return;
+    }
+    setActiveTab('acciones');
   };
 
   const handleLogout = async () => {
@@ -236,7 +247,7 @@ export default function App() {
               </span>
               {activeTab === 'alineacion' && (
                 <button
-                  onClick={() => setActiveTab('acciones')}
+                  onClick={handleAceptar}
                   style={{
                     background: '#0284c7',
                     color: '#ffffff',
@@ -390,6 +401,24 @@ export default function App() {
               )}
               {activeTab === 'alineacion' && (
                 <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
+                  {alineacionError && (
+                    <div style={{
+                      position: 'fixed',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      background: '#dc2626',
+                      color: '#ffffff',
+                      fontWeight: 900,
+                      fontSize: '1.5rem',
+                      padding: '1.5rem 3rem',
+                      borderRadius: '12px',
+                      zIndex: 1000,
+                      animation: 'blink 0.5s infinite'
+                    }}>
+                      ERROR DE ALINEACION
+                    </div>
+                  )}
                   {/* Columna izquierda */}
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {players.slice(0, 12).map((p, i) => (

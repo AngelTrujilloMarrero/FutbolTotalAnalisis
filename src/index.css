@@ -211,3 +211,8 @@ button {
   padding: 0.25rem 0.5rem;
   font-size: 0.75rem;
 }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
