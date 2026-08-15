@@ -221,7 +221,10 @@ export default function App() {
             }}>
               {activeTab === 'acciones' ? (
                 <button
-                  onClick={() => setTiroDerechaCount(tiroDerechaCount + 1)}
+                  onClick={() => {
+                    setTiroDerechaCount(tiroDerechaCount + 1);
+                    setActiveTab('finalizaciones');
+                  }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
