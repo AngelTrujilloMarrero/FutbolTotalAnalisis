@@ -232,6 +232,23 @@ export default function App() {
               <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
                 JORNADA {currentMatch.matchday}
               </span>
+              {activeTab === 'alineacion' && (
+                <button
+                  onClick={() => setActiveTab('acciones')}
+                  style={{
+                    background: '#0284c7',
+                    color: '#ffffff',
+                    fontWeight: 700,
+                    fontSize: '0.75rem',
+                    padding: '0.3rem 0.8rem',
+                    borderRadius: 'var(--radius-full)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}
+                >
+                  ACEPTAR
+                </button>
+              )}
             </div>
 
             {/* Hoja en blanco para construir */}
@@ -419,23 +436,6 @@ export default function App() {
                       <option value="no convocado">NO CONVOCADO</option>
                       <option value="division honor">DIVISION HONOR</option>
                     </select>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
-                    <button
-                      onClick={() => setActiveTab('acciones')}
-                      style={{
-                        background: '#0284c7',
-                        color: '#ffffff',
-                        fontWeight: 900,
-                        fontSize: '0.95rem',
-                        padding: '0.8rem 2rem',
-                        borderRadius: '12px',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em'
-                      }}
-                    >
-                      ACEPTAR
-                    </button>
                   </div>
                 </div>
               )}
