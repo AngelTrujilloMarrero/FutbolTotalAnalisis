@@ -305,7 +305,7 @@ export default function App() {
                   {/* Botón OCASION centrado arriba */}
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <button
-                      onClick={() => { setOcasionCount(ocasionCount + 1); setActiveTab('acciones'); }}
+                      onClick={() => { setOcasionCount(ocasionCount + 1); }}
                       style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f97316', color: '#ffffff', fontWeight: 900, fontSize: '0.95rem', padding: '0.8rem 1.5rem', borderRadius: '12px', minWidth: '250px', textTransform: 'uppercase', letterSpacing: '0.05em' }}
                     >
                       <span>OCASION</span>
