@@ -382,7 +382,9 @@ export default function App() {
                 flexDirection: 'row',
                 gap: '2rem'
               }}>
-                {/* Columna izquierda - Botones de acción */}
+                {/* Columna izquierda vacía */}
+                <div style={{ flex: 1 }}></div>
+                {/* Columna derecha - Botones de acción */}
                 <div style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -730,8 +732,6 @@ export default function App() {
                     </span>
                   </button>
                 </div>
-                {/* Columna derecha vacía */}
-                <div style={{ flex: 1 }}></div>
               </div>
             )}
             {activeTab === 'finalizaciones' && (
