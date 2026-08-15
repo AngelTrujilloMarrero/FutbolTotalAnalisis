@@ -155,6 +155,21 @@ export default function App() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button className="btn-sm btn-secondary" onClick={handleBackToList} style={{ fontSize: '1rem' }}>←</button>
             <button
+              onClick={() => setActiveTab('alineacion')}
+              style={{
+                fontWeight: 800,
+                fontSize: '1.15rem',
+                color: activeTab === 'alineacion' ? '#ffffff' : '#64748b',
+                borderBottom: activeTab === 'alineacion' ? '2px solid #ffffff' : '2px solid transparent',
+                paddingBottom: '0.2rem',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              ALINEACION
+            </button>
+            <button
               onClick={() => setActiveTab('acciones')}
               style={{
                 fontWeight: 800,
@@ -183,21 +198,6 @@ export default function App() {
               }}
             >
               FINALIZACIONES
-            </button>
-            <button
-              onClick={() => setActiveTab('goles')}
-              style={{
-                fontWeight: 800,
-                fontSize: '1.15rem',
-                color: activeTab === 'goles' ? '#ffffff' : '#64748b',
-                borderBottom: activeTab === 'goles' ? '2px solid #ffffff' : '2px solid transparent',
-                paddingBottom: '0.2rem',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer'
-              }}
-            >
-              GOLES
             </button>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -322,14 +322,14 @@ export default function App() {
                   {/* Columna derecha */}
                   <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <button
-                      onClick={() => { setGolCount(golCount + 1); setActiveTab('goles'); }}
+                      onClick={() => { setGolCount(golCount + 1); setActiveTab('alineacion'); }}
                       style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#16a34a', color: '#ffffff', fontWeight: 900, fontSize: '0.95rem', padding: '0.8rem 1.5rem', borderRadius: '12px', minWidth: '220px', textTransform: 'uppercase', letterSpacing: '0.05em' }}
                     >
                       <span>GOL</span>
                       <span style={{ background: '#ffffff', color: '#16a34a', fontWeight: 900, fontSize: '1rem', padding: '0.2rem 0.7rem', borderRadius: '8px', minWidth: '30px', textAlign: 'center' }}>{golCount}</span>
                     </button>
                     <button
-                      onClick={() => { setPenalCount(penalCount + 1); setActiveTab('goles'); }}
+                      onClick={() => { setPenalCount(penalCount + 1); setActiveTab('alineacion'); }}
                       style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#16a34a', color: '#ffffff', fontWeight: 900, fontSize: '0.95rem', padding: '0.8rem 1.5rem', borderRadius: '12px', minWidth: '220px', textTransform: 'uppercase', letterSpacing: '0.05em' }}
                     >
                       <span>PENAL + GOL</span>
@@ -352,7 +352,7 @@ export default function App() {
                   </div>
                 </div>
               )}
-              {activeTab === 'goles' && (
+              {activeTab === 'alineacion' && (
                 <div style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 600 }}>
                   GOLES — en construcción
                 </div>
