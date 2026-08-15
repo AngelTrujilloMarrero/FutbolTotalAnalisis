@@ -143,7 +143,7 @@ export default function App() {
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button className="btn-sm btn-secondary" onClick={handleBackToList} style={{ fontSize: '1rem' }}>←</button>
-            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#ffffff' }}>Acciones</span>
+            <span style={{ fontWeight: 800, fontSize: '1.15rem', color: '#ffffff' }}>ACCIONES</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
