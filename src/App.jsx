@@ -532,8 +532,8 @@ export default function App() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    background: '#eab308',
-                    color: '#000000',
+                    background: '#3b82f6',
+                    color: '#ffffff',
                     fontWeight: 900,
                     fontSize: '0.95rem',
                     padding: '0.8rem 1.5rem',
@@ -546,7 +546,7 @@ export default function App() {
                   <span>FALTA IZQUIERDA</span>
                   <span style={{
                     background: '#000000',
-                    color: '#eab308',
+                    color: '#3b82f6',
                     fontWeight: 900,
                     fontSize: '1rem',
                     padding: '0.2rem 0.7rem',
