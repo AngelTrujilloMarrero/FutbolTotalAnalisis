@@ -23,6 +23,7 @@ export default function App() {
   const [currentMatch, setCurrentMatch] = useState(null);
   const [activeTab, setActiveTab] = useState('acciones');
   const [tiroDerechaCount, setTiroDerechaCount] = useState(0);
+  const [fueraCount, setFueraCount] = useState(0);
 
   useEffect(() => {
     if (!user) return;
@@ -255,9 +256,40 @@ export default function App() {
                   </span>
                 </button>
               ) : (
-                <div style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 600 }}>
-                  FINALIZACIONES — en construcción
-                </div>
+                <button
+                  onClick={() => {
+                    setFueraCount(fueraCount + 1);
+                    setActiveTab('acciones');
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    background: '#16a34a',
+                    color: '#ffffff',
+                    fontWeight: 900,
+                    fontSize: '0.95rem',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '12px',
+                    minWidth: '250px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}
+                >
+                  <span>FUERA</span>
+                  <span style={{
+                    background: '#ffffff',
+                    color: '#16a34a',
+                    fontWeight: 900,
+                    fontSize: '1rem',
+                    padding: '0.2rem 0.7rem',
+                    borderRadius: '8px',
+                    minWidth: '30px',
+                    textAlign: 'center'
+                  }}>
+                    {fueraCount}
+                  </span>
+                </button>
               )}
             </div>
           </div>
