@@ -35,7 +35,7 @@ export default function App() {
   const [ocasionCount, setOcasionCount] = useState(0);
   const [selectedPlayer, setSelectedPlayer] = useState('');
   const [playerStatus, setPlayerStatus] = useState('titular');
-  const [players, setPlayers] = useState(Array(23).fill({ name: 'JUAN', status: 'titular' }));
+  const [players, setPlayers] = useState(Array(23).fill({ name: 'JUAN', status: '-' }));
 
   useEffect(() => {
     if (!user) return;
@@ -442,6 +442,7 @@ export default function App() {
                             flex: 1
                           }}
                         >
+                          <option value="-">-</option>
                           <option value="titular">TITULAR</option>
                           <option value="suplente">SUPLENTE</option>
                           <option value="lesion">LESION</option>
@@ -503,6 +504,7 @@ export default function App() {
                             flex: 1
                           }}
                         >
+                          <option value="-">-</option>
                           <option value="titular">TITULAR</option>
                           <option value="suplente">SUPLENTE</option>
                           <option value="lesion">LESION</option>
