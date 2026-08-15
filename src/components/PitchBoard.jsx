@@ -1,12 +1,17 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 export default function PitchBoard({
   selectedZone,
   onSelectZone,
   markerPos,
-  onSetMarkerPos
+  onSetMarkerPos,
+  placedPlayers = [],
+  onPlacePlayer,
+  onMovePlacedPlayer,
+  onRemovePlacedPlayer
 }) {
   const pitchRef = useRef(null);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   // 9 Tactical Zones (3 Tercios: Defensivo, Medio, Ofensivo x 3 Carriles: Izquierda, Centro, Derecha)
   const zones = [
@@ -23,12 +28,55 @@ export default function PitchBoard({
     { id: 'ofe_der', label: 'Ofe Der', tercio: 'Ofensivo', carril: 'Derecho' },
   ];
 
+  const clamp = (value) => Math.min(100, Math.max(0, Math.round(value)));
+
+  const coordsFromEvent = (e) => {
+    if (!pitchRef.current) return null;
+    const rect = pitchRef.current.getBoundingClientRect();
+    const x = clamp(((e.clientX - rect.left) / rect.width) * 100);
+    const y = clamp(((e.clientY - rect.top) / rect.height) * 100);
+    return { x, y };
+  };
+
   const handlePitchClick = (e) => {
     if (!pitchRef.current) return;
     const rect = pitchRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
     onSetMarkerPos({ x: Math.round(x), y: Math.round(y) });
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'copy';
+    if (!isDragOver) setIsDragOver(true);
+  };
+
+  const handleDragLeave = (e) => {
+    if (!pitchRef.current?.contains(e.relatedTarget)) {
+      setIsDragOver(false);
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragOver(false);
+    const coords = coordsFromEvent(e);
+    if (!coords) return;
+
+    let data;
+    try {
+      data = JSON.parse(e.dataTransfer.getData('text/plain'));
+    } catch {
+      return;
+    }
+    if (!data || !data.dorsal) return;
+
+    if (data.repositioning) {
+      onMovePlacedPlayer && onMovePlacedPlayer(data.dorsal, coords.x, coords.y);
+    } else {
+      onPlacePlayer && onPlacePlayer({ dorsal: data.dorsal, name: data.name, color: data.color }, coords.x, coords.y);
+    }
   };
 
   return (
@@ -42,10 +90,13 @@ export default function PitchBoard({
         )}
       </div>
 
-      <div 
-        className="pitch-container"
+      <div
+        className={`pitch-container ${isDragOver ? 'drag-over' : ''}`}
         ref={pitchRef}
         onClick={handlePitchClick}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
       >
         {/* Pitch Lines */}
         <div className="pitch-center-line" />
@@ -71,6 +122,39 @@ export default function PitchBoard({
           ))}
         </div>
 
+        {/* Placed Player Dorsals */}
+        {placedPlayers.map((player) => (
+          <div
+            key={player.dorsal}
+            className="pitch-player-marker"
+            style={{ left: `${player.x}%`, top: `${player.y}%` }}
+            draggable
+            onDragStart={(e) => {
+              e.dataTransfer.setData(
+                'text/plain',
+                JSON.stringify({ dorsal: player.dorsal, repositioning: true })
+              );
+              e.dataTransfer.effectAllowed = 'move';
+            }}
+            onClick={(e) => e.stopPropagation()}
+            title={`Dorsal ${player.dorsal}${player.name ? ` - ${player.name}` : ''} (arrastra para mover)`}
+          >
+            <span className="pitch-player-shirt">
+              <span className="pitch-player-number">{player.dorsal}</span>
+            </span>
+            <button
+              className="pitch-player-remove"
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemovePlacedPlayer && onRemovePlacedPlayer(player.dorsal);
+              }}
+              title="Quitar del campo"
+            >
+              ✕
+            </button>
+          </div>
+        ))}
+
         {/* Click Marker */}
         {markerPos && (
           <div
@@ -82,6 +166,12 @@ export default function PitchBoard({
           />
         )}
       </div>
+
+      {placedPlayers.length > 0 && (
+        <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)', textAlign: 'center' }}>
+          {placedPlayers.length} dorsal(es) en el campo — arrastra para mover, ✕ para quitar
+        </div>
+      )}
     </div>
   );
 }

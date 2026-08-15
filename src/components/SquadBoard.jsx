@@ -27,22 +27,22 @@ export default function SquadBoard({
   // MID: 8, 10, 6, 11
   // FWD: 9, 7
   const defaultLineup = [
-    { row: 'GK', players: [{ dorsal: 1, name: 'Portero', pos: 'POR', color: '#0f172a' }] },
+    { row: 'GK', players: [{ dorsal: 1, name: 'Portero', pos: 'POR', color: '#5b21b6' }] },
     { row: 'DEF', players: [
-      { dorsal: 2, name: 'Lat Der', pos: 'LD', color: '#c2410c' },
-      { dorsal: 4, name: 'Central', pos: 'DFC', color: '#c2410c' },
-      { dorsal: 5, name: 'Central', pos: 'DFC', color: '#c2410c' },
-      { dorsal: 3, name: 'Lat Izq', pos: 'LI', color: '#c2410c' }
+      { dorsal: 2, name: 'Lat Der', pos: 'LD', color: '#7c3aed' },
+      { dorsal: 4, name: 'Central', pos: 'DFC', color: '#7c3aed' },
+      { dorsal: 5, name: 'Central', pos: 'DFC', color: '#7c3aed' },
+      { dorsal: 3, name: 'Lat Izq', pos: 'LI', color: '#7c3aed' }
     ]},
     { row: 'MID', players: [
-      { dorsal: 8, name: 'Interior', pos: 'MC', color: '#c2410c' },
-      { dorsal: 10, name: 'Mediapunta', pos: 'MCO', color: '#c2410c' },
-      { dorsal: 6, name: 'Pivote', pos: 'MCD', color: '#c2410c' },
-      { dorsal: 11, name: 'Extremo', pos: 'EI', color: '#c2410c' }
+      { dorsal: 8, name: 'Interior', pos: 'MC', color: '#7c3aed' },
+      { dorsal: 10, name: 'Mediapunta', pos: 'MCO', color: '#7c3aed' },
+      { dorsal: 6, name: 'Pivote', pos: 'MCD', color: '#7c3aed' },
+      { dorsal: 11, name: 'Extremo', pos: 'EI', color: '#7c3aed' }
     ]},
     { row: 'FWD', players: [
-      { dorsal: 9, name: 'Delantero', pos: 'DC', color: '#c2410c' },
-      { dorsal: 7, name: 'Extremo', pos: 'ED', color: '#c2410c' }
+      { dorsal: 9, name: 'Delantero', pos: 'DC', color: '#7c3aed' },
+      { dorsal: 7, name: 'Extremo', pos: 'ED', color: '#7c3aed' }
     ]}
   ];
 
@@ -67,7 +67,20 @@ export default function SquadBoard({
                   key={player.dorsal}
                   className={`player-jersey-btn ${isSelected ? 'selected' : ''}`}
                   onClick={() => onSelectPlayer(isSelected ? null : player)}
-                  title={`Dorsal ${player.dorsal} - ${player.name} (${player.pos})`}
+                  draggable
+                  onDragStart={(e) => {
+                    e.dataTransfer.setData(
+                      'text/plain',
+                      JSON.stringify({
+                        dorsal: player.dorsal,
+                        name: player.name,
+                        color: player.color,
+                        pos: player.pos
+                      })
+                    );
+                    e.dataTransfer.effectAllowed = 'copy';
+                  }}
+                  title={`Arrastra el dorsal ${player.dorsal} al campo para colocarlo`}
                 >
                   <span className="player-dot" />
                   <JerseyIcon number={player.dorsal} color={player.color} />

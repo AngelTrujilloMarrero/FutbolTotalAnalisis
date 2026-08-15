@@ -56,6 +56,29 @@ export default function App() {
   const [markerPos, setMarkerPos] = useState(null);
   const [selectedPhase, setSelectedPhase] = useState(null);
 
+  // Players placed on the pitch (dorsals dragged from the lineup) - session only
+  const [placedPlayers, setPlacedPlayers] = useState([]);
+
+  const handlePlacePlayer = useCallback((player, x, y) => {
+    setPlacedPlayers((prev) => {
+      const exists = prev.find((p) => p.dorsal === player.dorsal);
+      if (exists) {
+        return prev.map((p) => (p.dorsal === player.dorsal ? { ...p, x, y } : p));
+      }
+      return [...prev, { dorsal: player.dorsal, name: player.name, color: player.color, x, y }];
+    });
+  }, []);
+
+  const handleMovePlacedPlayer = useCallback((dorsal, x, y) => {
+    setPlacedPlayers((prev) =>
+      prev.map((p) => (p.dorsal === dorsal ? { ...p, x, y } : p))
+    );
+  }, []);
+
+  const handleRemovePlacedPlayer = useCallback((dorsal) => {
+    setPlacedPlayers((prev) => prev.filter((p) => p.dorsal !== dorsal));
+  }, []);
+
   // 0. Firebase Auth Listener
   useEffect(() => {
     const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
@@ -479,6 +502,10 @@ export default function App() {
                   onSelectZone={setSelectedZone}
                   markerPos={markerPos}
                   onSetMarkerPos={setMarkerPos}
+                  placedPlayers={placedPlayers}
+                  onPlacePlayer={handlePlacePlayer}
+                  onMovePlacedPlayer={handleMovePlacedPlayer}
+                  onRemovePlacedPlayer={handleRemovePlacedPlayer}
                 />
               </div>
             </div>
