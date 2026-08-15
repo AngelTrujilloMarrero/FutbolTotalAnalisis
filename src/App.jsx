@@ -370,7 +370,7 @@ export default function App() {
                 </div>
               )}
               {activeTab === 'alineacion' && (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <select
                       value={selectedPlayer}
@@ -420,22 +420,23 @@ export default function App() {
                       <option value="division honor">DIVISION HONOR</option>
                     </select>
                   </div>
-                  <button
-                    onClick={() => setActiveTab('finalizaciones')}
-                    style={{
-                      background: '#0284c7',
-                      color: '#ffffff',
-                      fontWeight: 900,
-                      fontSize: '0.95rem',
-                      padding: '0.8rem 2rem',
-                      borderRadius: '12px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      marginTop: '1rem'
-                    }}
-                  >
-                    ACEPTAR
-                  </button>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'auto' }}>
+                    <button
+                      onClick={() => setActiveTab('acciones')}
+                      style={{
+                        background: '#0284c7',
+                        color: '#ffffff',
+                        fontWeight: 900,
+                        fontSize: '0.95rem',
+                        padding: '0.8rem 2rem',
+                        borderRadius: '12px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em'
+                      }}
+                    >
+                      ACEPTAR
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
