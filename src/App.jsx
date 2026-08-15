@@ -25,6 +25,7 @@ export default function App() {
   const [tiroDerechaCount, setTiroDerechaCount] = useState(0);
   const [tiroIzquierdaCount, setTiroIzquierdaCount] = useState(0);
   const [tiroFrontalCount, setTiroFrontalCount] = useState(0);
+  const [faltaDerechaCount, setFaltaDerechaCount] = useState(0);
   const [fueraCount, setFueraCount] = useState(0);
   const [blocajeCount, setBlocajeCount] = useState(0);
   const [despejeDefensaCount, setDespejeDefensaCount] = useState(0);
@@ -481,6 +482,42 @@ export default function App() {
                     textAlign: 'center'
                   }}>
                     {tiroFrontalCount}
+                  </span>
+                </button>
+              )}
+              {activeTab === 'acciones' && (
+                <button
+                  onClick={() => {
+                    setFaltaDerechaCount(faltaDerechaCount + 1);
+                    setActiveTab('finalizaciones');
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    background: '#eab308',
+                    color: '#000000',
+                    fontWeight: 900,
+                    fontSize: '0.95rem',
+                    padding: '0.8rem 1.5rem',
+                    borderRadius: '12px',
+                    minWidth: '250px',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
+                  }}
+                >
+                  <span>FALTA DERECHA</span>
+                  <span style={{
+                    background: '#000000',
+                    color: '#eab308',
+                    fontWeight: 900,
+                    fontSize: '1rem',
+                    padding: '0.2rem 0.7rem',
+                    borderRadius: '8px',
+                    minWidth: '30px',
+                    textAlign: 'center'
+                  }}>
+                    {faltaDerechaCount}
                   </span>
                 </button>
               )}
