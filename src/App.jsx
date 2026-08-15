@@ -35,6 +35,7 @@ export default function App() {
   const [ocasionCount, setOcasionCount] = useState(0);
   const [selectedPlayer, setSelectedPlayer] = useState('');
   const [playerStatus, setPlayerStatus] = useState('titular');
+  const [players, setPlayers] = useState(Array(22).fill({ name: 'JUAN', status: 'titular' }));
 
   useEffect(() => {
     if (!user) return;
@@ -387,53 +388,126 @@ export default function App() {
                 </div>
               )}
               {activeTab === 'alineacion' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <select
-                      value={selectedPlayer}
-                      onChange={(e) => setSelectedPlayer(e.target.value)}
-                      style={{
-                        background: 'var(--bg-secondary)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: '12px',
-                        color: '#ffffff',
-                        fontWeight: 900,
-                        fontSize: '0.95rem',
-                        padding: '0.8rem 1.5rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <option value="JUAN">JUAN</option>
-                      <option value="PEDRO">PEDRO</option>
-                      <option value="LUIS">LUIS</option>
-                      <option value="MILLA">MILLA</option>
-                      <option value="ALEXIS">ALEXIS</option>
-                      <option value="ANTONIO">ANTONIO</option>
-                    </select>
-                    <select
-                      value={playerStatus}
-                      onChange={(e) => setPlayerStatus(e.target.value)}
-                      style={{
-                        background: 'var(--bg-secondary)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: '12px',
-                        color: '#ffffff',
-                        fontWeight: 900,
-                        fontSize: '0.95rem',
-                        padding: '0.8rem 1.5rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <option value="titular">TITULAR</option>
-                      <option value="suplente">SUPLENTE</option>
-                      <option value="lesion">LESION</option>
-                      <option value="no convocado">NO CONVOCADO</option>
-                      <option value="division honor">DIVISION HONOR</option>
-                    </select>
+                <div style={{ display: 'flex', gap: '1rem', width: '100%' }}>
+                  {/* Columna izquierda */}
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {players.slice(0, 11).map((p, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '0.5rem' }}>
+                        <select
+                          value={p.name}
+                          onChange={(e) => {
+                            const newPlayers = [...players];
+                            newPlayers[i] = { ...newPlayers[i], name: e.target.value };
+                            setPlayers(newPlayers);
+                          }}
+                          style={{
+                            background: 'var(--bg-secondary)',
+                            border: '1px solid var(--border-subtle)',
+                            borderRadius: '8px',
+                            color: '#ffffff',
+                            fontWeight: 700,
+                            fontSize: '0.8rem',
+                            padding: '0.4rem 0.6rem',
+                            textTransform: 'uppercase',
+                            cursor: 'pointer',
+                            flex: 1
+                          }}
+                        >
+                          <option value="JUAN">JUAN</option>
+                          <option value="PEDRO">PEDRO</option>
+                          <option value="LUIS">LUIS</option>
+                          <option value="MILLA">MILLA</option>
+                          <option value="ALEXIS">ALEXIS</option>
+                          <option value="ANTONIO">ANTONIO</option>
+                        </select>
+                        <select
+                          value={p.status}
+                          onChange={(e) => {
+                            const newPlayers = [...players];
+                            newPlayers[i] = { ...newPlayers[i], status: e.target.value };
+                            setPlayers(newPlayers);
+                          }}
+                          style={{
+                            background: 'var(--bg-secondary)',
+                            border: '1px solid var(--border-subtle)',
+                            borderRadius: '8px',
+                            color: '#ffffff',
+                            fontWeight: 700,
+                            fontSize: '0.8rem',
+                            padding: '0.4rem 0.6rem',
+                            textTransform: 'uppercase',
+                            cursor: 'pointer',
+                            flex: 1
+                          }}
+                        >
+                          <option value="titular">TITULAR</option>
+                          <option value="suplente">SUPLENTE</option>
+                          <option value="lesion">LESION</option>
+                          <option value="no convocado">NO CONVOCADO</option>
+                          <option value="division honor">DIVISION HONOR</option>
+                        </select>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Columna derecha */}
+                  <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {players.slice(11, 22).map((p, i) => (
+                      <div key={i + 11} style={{ display: 'flex', gap: '0.5rem' }}>
+                        <select
+                          value={p.name}
+                          onChange={(e) => {
+                            const newPlayers = [...players];
+                            newPlayers[i + 11] = { ...newPlayers[i + 11], name: e.target.value };
+                            setPlayers(newPlayers);
+                          }}
+                          style={{
+                            background: 'var(--bg-secondary)',
+                            border: '1px solid var(--border-subtle)',
+                            borderRadius: '8px',
+                            color: '#ffffff',
+                            fontWeight: 700,
+                            fontSize: '0.8rem',
+                            padding: '0.4rem 0.6rem',
+                            textTransform: 'uppercase',
+                            cursor: 'pointer',
+                            flex: 1
+                          }}
+                        >
+                          <option value="JUAN">JUAN</option>
+                          <option value="PEDRO">PEDRO</option>
+                          <option value="LUIS">LUIS</option>
+                          <option value="MILLA">MILLA</option>
+                          <option value="ALEXIS">ALEXIS</option>
+                          <option value="ANTONIO">ANTONIO</option>
+                        </select>
+                        <select
+                          value={p.status}
+                          onChange={(e) => {
+                            const newPlayers = [...players];
+                            newPlayers[i + 11] = { ...newPlayers[i + 11], status: e.target.value };
+                            setPlayers(newPlayers);
+                          }}
+                          style={{
+                            background: 'var(--bg-secondary)',
+                            border: '1px solid var(--border-subtle)',
+                            borderRadius: '8px',
+                            color: '#ffffff',
+                            fontWeight: 700,
+                            fontSize: '0.8rem',
+                            padding: '0.4rem 0.6rem',
+                            textTransform: 'uppercase',
+                            cursor: 'pointer',
+                            flex: 1
+                          }}
+                        >
+                          <option value="titular">TITULAR</option>
+                          <option value="suplente">SUPLENTE</option>
+                          <option value="lesion">LESION</option>
+                          <option value="no convocado">NO CONVOCADO</option>
+                          <option value="division honor">DIVISION HONOR</option>
+                        </select>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
