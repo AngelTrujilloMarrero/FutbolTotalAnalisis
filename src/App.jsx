@@ -171,7 +171,7 @@ export default function App() {
               <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#334155' }}>vs</span>
               <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f87171' }}>{currentMatch.awayTeam}</span>
               <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
-                Jornada {currentMatch.matchday}
+                JORNADA {currentMatch.matchday}
               </span>
             </div>
 
@@ -264,7 +264,7 @@ export default function App() {
               </label>
 
               <label style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-secondary)' }}>
-                Jornada
+                JORNADA
                 <input
                   type="number"
                   className="input-control"
