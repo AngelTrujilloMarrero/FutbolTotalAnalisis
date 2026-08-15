@@ -294,7 +294,7 @@ export default function App() {
                   ACEPTAR
                 </button>
               )}
-              {activeTab === 'finalizaciones' && (
+              {activeTab === 'acciones' && (
                 <>
                   <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 900, fontSize: '1rem', color: '#38bdf8', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
                     {formatTime(timerSeconds)}
