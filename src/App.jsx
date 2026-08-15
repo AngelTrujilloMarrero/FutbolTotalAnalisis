@@ -316,43 +316,45 @@ export default function App() {
                   >
                     1ª PARTE
                   </button>
-                  <button
-                    onClick={handleSegundaParte}
-                    style={{
-                      background: '#7c3aed',
-                      color: '#ffffff',
-                      fontWeight: 700,
-                      fontSize: '0.75rem',
-                      padding: '0.3rem 0.8rem',
-                      borderRadius: 'var(--radius-full)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      minWidth: '80px',
-                      textAlign: 'center'
-                    }}
-                  >
-                    2ª PARTE
-                  </button>
+                  <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'stretch' }}>
+                    <button
+                      onClick={handleSegundaParte}
+                      style={{
+                        background: '#7c3aed',
+                        color: '#ffffff',
+                        fontWeight: 700,
+                        fontSize: '0.75rem',
+                        padding: '0.3rem 0.8rem',
+                        borderRadius: 'var(--radius-full)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        minWidth: '80px',
+                        textAlign: 'center',
+                        flex: 1
+                      }}
+                    >
+                      2ª PARTE
+                    </button>
+                    <button
+                      onClick={handleFin}
+                      style={{
+                        background: '#dc2626',
+                        color: '#ffffff',
+                        fontWeight: 700,
+                        fontSize: '0.75rem',
+                        padding: '0.3rem 0.8rem',
+                        borderRadius: 'var(--radius-full)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        minWidth: '80px',
+                        textAlign: 'center',
+                        flex: 1
+                      }}
+                    >
+                      FIN
+                    </button>
+                  </div>
                 </div>
-              )}
-              {activeTab === 'acciones' && (
-                <button
-                  onClick={handleFin}
-                  style={{
-                    background: '#dc2626',
-                    color: '#ffffff',
-                    fontWeight: 700,
-                    fontSize: '0.75rem',
-                    padding: '0.3rem 0.8rem',
-                    borderRadius: 'var(--radius-full)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    minWidth: '80px',
-                    textAlign: 'center'
-                  }}
-                >
-                  FIN
-                </button>
               )}
             </div>
 
