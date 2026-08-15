@@ -386,7 +386,6 @@ export default function App() {
                       minWidth: '250px'
                     }}
                   >
-                    <option value="">SELECCIONAR JUGADOR</option>
                     <option value="JUAN">JUAN</option>
                     <option value="PEDRO">PEDRO</option>
                     <option value="LUIS">LUIS</option>
