@@ -109,6 +109,7 @@ export default function App() {
 
   const handleOpenMatch = (match) => {
     setCurrentMatch(match);
+    setActiveTab('alineacion');
   };
 
   const handleBackToList = () => {
@@ -419,6 +420,22 @@ export default function App() {
                       <option value="division honor">DIVISION HONOR</option>
                     </select>
                   </div>
+                  <button
+                    onClick={() => setActiveTab('finalizaciones')}
+                    style={{
+                      background: '#0284c7',
+                      color: '#ffffff',
+                      fontWeight: 900,
+                      fontSize: '0.95rem',
+                      padding: '0.8rem 2rem',
+                      borderRadius: '12px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      marginTop: '1rem'
+                    }}
+                  >
+                    ACEPTAR
+                  </button>
                 </div>
               )}
             </div>
