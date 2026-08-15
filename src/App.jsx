@@ -299,23 +299,26 @@ export default function App() {
                   <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 900, fontSize: '1.8rem', color: '#38bdf8', background: 'var(--bg-secondary)', padding: '0.5rem 1.2rem', borderRadius: 'var(--radius-full)', textAlign: 'center' }}>
                     {formatTime(timerSeconds)}
                   </span>
-                  <button
-                    onClick={handlePrimeraParte}
-                    style={{
-                      background: '#0284c7',
-                      color: '#ffffff',
-                      fontWeight: 700,
-                      fontSize: '0.75rem',
-                      padding: '0.3rem 0.8rem',
-                      borderRadius: 'var(--radius-full)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      minWidth: '80px',
-                      textAlign: 'center'
-                    }}
-                  >
-                    1ª PARTE
-                  </button>
+                  <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'stretch' }}>
+                    <button
+                      onClick={handlePrimeraParte}
+                      style={{
+                        background: '#0284c7',
+                        color: '#ffffff',
+                        fontWeight: 700,
+                        fontSize: '0.75rem',
+                        padding: '0.3rem 0.8rem',
+                        borderRadius: 'var(--radius-full)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        minWidth: '80px',
+                        textAlign: 'center',
+                        flex: 1
+                      }}
+                    >
+                      1ª PARTE
+                    </button>
+                  </div>
                   <div style={{ display: 'flex', gap: '0.3rem', alignItems: 'stretch' }}>
                     <button
                       onClick={handleSegundaParte}
