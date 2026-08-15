@@ -34,6 +34,7 @@ export default function App() {
   const [infraccionCount, setInfraccionCount] = useState(0);
   const [ocasionCount, setOcasionCount] = useState(0);
   const [selectedPlayer, setSelectedPlayer] = useState('');
+  const [playerStatus, setPlayerStatus] = useState('titular');
 
   useEffect(() => {
     if (!user) return;
@@ -369,30 +370,55 @@ export default function App() {
               )}
               {activeTab === 'alineacion' && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                  <select
-                    value={selectedPlayer}
-                    onChange={(e) => setSelectedPlayer(e.target.value)}
-                    style={{
-                      background: 'var(--bg-secondary)',
-                      border: '1px solid var(--border-subtle)',
-                      borderRadius: '12px',
-                      color: '#ffffff',
-                      fontWeight: 900,
-                      fontSize: '0.95rem',
-                      padding: '0.8rem 1.5rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      cursor: 'pointer',
-                      minWidth: '250px'
-                    }}
-                  >
-                    <option value="JUAN">JUAN</option>
-                    <option value="PEDRO">PEDRO</option>
-                    <option value="LUIS">LUIS</option>
-                    <option value="MILLA">MILLA</option>
-                    <option value="ALEXIS">ALEXIS</option>
-                    <option value="ANTONIO">ANTONIO</option>
-                  </select>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <select
+                      value={selectedPlayer}
+                      onChange={(e) => setSelectedPlayer(e.target.value)}
+                      style={{
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border-subtle)',
+                        borderRadius: '12px',
+                        color: '#ffffff',
+                        fontWeight: 900,
+                        fontSize: '0.95rem',
+                        padding: '0.8rem 1.5rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        cursor: 'pointer',
+                        minWidth: '200px'
+                      }}
+                    >
+                      <option value="JUAN">JUAN</option>
+                      <option value="PEDRO">PEDRO</option>
+                      <option value="LUIS">LUIS</option>
+                      <option value="MILLA">MILLA</option>
+                      <option value="ALEXIS">ALEXIS</option>
+                      <option value="ANTONIO">ANTONIO</option>
+                    </select>
+                    <select
+                      value={playerStatus}
+                      onChange={(e) => setPlayerStatus(e.target.value)}
+                      style={{
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border-subtle)',
+                        borderRadius: '12px',
+                        color: '#ffffff',
+                        fontWeight: 900,
+                        fontSize: '0.95rem',
+                        padding: '0.8rem 1.5rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                        cursor: 'pointer',
+                        minWidth: '180px'
+                      }}
+                    >
+                      <option value="titular">TITULAR</option>
+                      <option value="suplente">SUPLENTE</option>
+                      <option value="lesion">LESION</option>
+                      <option value="no convocado">NO CONVOCADO</option>
+                      <option value="division honor">DIVISION HONOR</option>
+                    </select>
+                  </div>
                 </div>
               )}
             </div>
