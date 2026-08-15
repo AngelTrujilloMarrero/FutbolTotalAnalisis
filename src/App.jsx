@@ -470,7 +470,7 @@ export default function App() {
                       letterSpacing: '0.05em'
                     }}
                   >
-                    <span>PENAL</span>
+                    <span>PENAL + GOL</span>
                     <span style={{
                       background: '#ffffff',
                       color: '#16a34a',
