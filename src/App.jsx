@@ -309,7 +309,9 @@ export default function App() {
                       padding: '0.3rem 0.8rem',
                       borderRadius: 'var(--radius-full)',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.05em'
+                      letterSpacing: '0.05em',
+                      minWidth: '80px',
+                      textAlign: 'center'
                     }}
                   >
                     1ª PARTE
@@ -324,7 +326,9 @@ export default function App() {
                       padding: '0.3rem 0.8rem',
                       borderRadius: 'var(--radius-full)',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.05em'
+                      letterSpacing: '0.05em',
+                      minWidth: '80px',
+                      textAlign: 'center'
                     }}
                   >
                     2ª PARTE
@@ -339,7 +343,9 @@ export default function App() {
                       padding: '0.3rem 0.8rem',
                       borderRadius: 'var(--radius-full)',
                       textTransform: 'uppercase',
-                      letterSpacing: '0.05em'
+                      letterSpacing: '0.05em',
+                      minWidth: '80px',
+                      textAlign: 'center'
                     }}
                   >
                     FIN
