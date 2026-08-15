@@ -37,6 +37,9 @@ export default function App() {
   const [playerStatus, setPlayerStatus] = useState('titular');
   const [players, setPlayers] = useState(Array(23).fill({ name: 'JUAN', status: '-' }));
   const [alineacionError, setAlineacionError] = useState(false);
+  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [timerInterval, setTimerInterval] = useState(null);
 
   useEffect(() => {
     if (!user) return;
@@ -128,6 +131,35 @@ export default function App() {
     }
     setActiveTab('acciones');
   };
+
+  const formatTime = (secs) => {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const handlePrimeraParte = () => {
+    setTimerSeconds(0);
+    setTimerRunning(true);
+  };
+
+  const handleSegundaParte = () => {
+    setTimerRunning(true);
+  };
+
+  const handleFin = () => {
+    setTimerRunning(false);
+  };
+
+  useEffect(() => {
+    let interval = null;
+    if (timerRunning) {
+      interval = setInterval(() => {
+        setTimerSeconds((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [timerRunning]);
 
   const handleLogout = async () => {
     try {
@@ -261,6 +293,58 @@ export default function App() {
                 >
                   ACEPTAR
                 </button>
+              )}
+              {activeTab === 'finalizaciones' && (
+                <>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 900, fontSize: '1rem', color: '#38bdf8', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
+                    {formatTime(timerSeconds)}
+                  </span>
+                  <button
+                    onClick={handlePrimeraParte}
+                    style={{
+                      background: '#0284c7',
+                      color: '#ffffff',
+                      fontWeight: 700,
+                      fontSize: '0.75rem',
+                      padding: '0.3rem 0.8rem',
+                      borderRadius: 'var(--radius-full)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em'
+                    }}
+                  >
+                    1ª PARTE
+                  </button>
+                  <button
+                    onClick={handleSegundaParte}
+                    style={{
+                      background: '#7c3aed',
+                      color: '#ffffff',
+                      fontWeight: 700,
+                      fontSize: '0.75rem',
+                      padding: '0.3rem 0.8rem',
+                      borderRadius: 'var(--radius-full)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em'
+                    }}
+                  >
+                    2ª PARTE
+                  </button>
+                  <button
+                    onClick={handleFin}
+                    style={{
+                      background: '#dc2626',
+                      color: '#ffffff',
+                      fontWeight: 700,
+                      fontSize: '0.75rem',
+                      padding: '0.3rem 0.8rem',
+                      borderRadius: 'var(--radius-full)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em'
+                    }}
+                  >
+                    FIN
+                  </button>
+                </>
               )}
             </div>
 
