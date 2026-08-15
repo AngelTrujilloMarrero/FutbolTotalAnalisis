@@ -71,6 +71,7 @@ export default function App() {
       setAwayTeam('');
       setMatchday('');
       setCurrentMatch({ id: newId, homeTeam, awayTeam, matchday: Number(matchday), homeScore: 0, awayScore: 0 });
+      setActiveTab('alineacion');
     } catch (err) {
       console.error('Error guardando partido:', err);
     }
