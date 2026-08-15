@@ -295,8 +295,8 @@ export default function App() {
                 </button>
               )}
               {activeTab === 'acciones' && (
-                <>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 900, fontSize: '1rem', color: '#38bdf8', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 900, fontSize: '1rem', color: '#38bdf8', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)', textAlign: 'center' }}>
                     {formatTime(timerSeconds)}
                   </span>
                   <button
@@ -333,24 +333,26 @@ export default function App() {
                   >
                     2ª PARTE
                   </button>
-                  <button
-                    onClick={handleFin}
-                    style={{
-                      background: '#dc2626',
-                      color: '#ffffff',
-                      fontWeight: 700,
-                      fontSize: '0.75rem',
-                      padding: '0.3rem 0.8rem',
-                      borderRadius: 'var(--radius-full)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                      minWidth: '80px',
-                      textAlign: 'center'
-                    }}
-                  >
-                    FIN
-                  </button>
-                </>
+                </div>
+              )}
+              {activeTab === 'acciones' && (
+                <button
+                  onClick={handleFin}
+                  style={{
+                    background: '#dc2626',
+                    color: '#ffffff',
+                    fontWeight: 700,
+                    fontSize: '0.75rem',
+                    padding: '0.3rem 0.8rem',
+                    borderRadius: 'var(--radius-full)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em',
+                    minWidth: '80px',
+                    textAlign: 'center'
+                  }}
+                >
+                  FIN
+                </button>
               )}
             </div>
 
