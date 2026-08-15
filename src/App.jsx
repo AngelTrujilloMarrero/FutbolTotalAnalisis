@@ -402,8 +402,7 @@ export default function App() {
                         padding: '0.8rem 1.5rem',
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em',
-                        cursor: 'pointer',
-                        minWidth: '200px'
+                        cursor: 'pointer'
                       }}
                     >
                       <option value="JUAN">JUAN</option>
@@ -426,8 +425,7 @@ export default function App() {
                         padding: '0.8rem 1.5rem',
                         textTransform: 'uppercase',
                         letterSpacing: '0.05em',
-                        cursor: 'pointer',
-                        minWidth: '180px'
+                        cursor: 'pointer'
                       }}
                     >
                       <option value="titular">TITULAR</option>
