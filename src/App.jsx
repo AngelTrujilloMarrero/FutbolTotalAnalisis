@@ -311,7 +311,8 @@ export default function App() {
                       textTransform: 'uppercase',
                       letterSpacing: '0.05em',
                       minWidth: '80px',
-                      textAlign: 'center'
+                      textAlign: 'center',
+                      width: '100%'
                     }}
                   >
                     1ª PARTE
