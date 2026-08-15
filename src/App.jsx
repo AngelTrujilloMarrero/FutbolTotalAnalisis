@@ -179,6 +179,21 @@ export default function App() {
             >
               FINALIZACIONES
             </button>
+            <button
+              onClick={() => setActiveTab('goles')}
+              style={{
+                fontWeight: 800,
+                fontSize: '1.15rem',
+                color: activeTab === 'goles' ? '#ffffff' : '#64748b',
+                borderBottom: activeTab === 'goles' ? '2px solid #ffffff' : '2px solid transparent',
+                paddingBottom: '0.2rem',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer'
+              }}
+            >
+              GOLES
+            </button>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
@@ -223,7 +238,7 @@ export default function App() {
               flexDirection: 'column',
               gap: '1rem'
             }}>
-              {activeTab === 'acciones' ? (
+              {activeTab === 'acciones' && (
                 <button
                   onClick={() => {
                     setTiroDerechaCount(tiroDerechaCount + 1);
@@ -258,7 +273,8 @@ export default function App() {
                     {tiroDerechaCount}
                   </span>
                 </button>
-              ) : (
+              )}
+              {activeTab === 'finalizaciones' && (
                 <>
                   <button
                     onClick={() => {
@@ -325,8 +341,8 @@ export default function App() {
                       minWidth: '30px',
                       textAlign: 'center'
                     }}>
-                    {blocajeCount}
-                  </span>
+                      {blocajeCount}
+                    </span>
                   </button>
                   <button
                     onClick={() => {
@@ -359,8 +375,8 @@ export default function App() {
                       minWidth: '30px',
                       textAlign: 'center'
                     }}>
-                    {despejeDefensaCount}
-                  </span>
+                      {despejeDefensaCount}
+                    </span>
                   </button>
                   <button
                     onClick={() => {
@@ -397,6 +413,11 @@ export default function App() {
                     </span>
                   </button>
                 </>
+              )}
+              {activeTab === 'goles' && (
+                <div style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 600 }}>
+                  GOLES — en construcción
+                </div>
               )}
             </div>
           </div>
