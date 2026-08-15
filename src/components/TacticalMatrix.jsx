@@ -4,7 +4,8 @@ export default function TacticalMatrix({
   counts = {},
   onTagEvent,
   selectedPhase,
-  setSelectedPhase
+  setSelectedPhase,
+  onOpenQuick
 }) {
   const handleTag = (category, subCategory, defaultType) => {
     onTagEvent({
@@ -36,24 +37,27 @@ export default function TacticalMatrix({
 
           <button 
             className="tag-btn cat-inicio-sub"
-            onClick={() => handleTag('inicio_juego', 'corto', 'Inicio Corto')}
+            onClick={() => {
+              handleTag('corner', 'derecha', 'Córner Derecha');
+              onOpenQuick && onOpenQuick();
+            }}
           >
             <div className="tag-btn-content">
               <span className="tag-indicator-dot" />
-              <span>Corto</span>
+              <span>Córner derecha</span>
             </div>
-            <span className="tag-counter-badge">{counts['inicio_juego_corto'] || 0}</span>
+            <span className="tag-counter-badge">{counts['corner_derecha'] || 0}</span>
           </button>
 
           <button 
             className="tag-btn cat-inicio-sub"
-            onClick={() => handleTag('inicio_juego', 'largo', 'Inicio Largo')}
+            onClick={() => handleTag('corner', 'izquierda', 'Córner Izquierda')}
           >
             <div className="tag-btn-content">
               <span className="tag-indicator-dot" />
-              <span>Largo</span>
+              <span>Córner izquierda</span>
             </div>
-            <span className="tag-counter-badge">{counts['inicio_juego_largo'] || 0}</span>
+            <span className="tag-counter-badge">{counts['corner_izquierda'] || 0}</span>
           </button>
 
           <button 

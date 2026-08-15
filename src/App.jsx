@@ -25,6 +25,7 @@ import TimelineSidebar from './components/TimelineSidebar';
 import StatsModal from './components/StatsModal';
 import VideoSyncModal from './components/VideoSyncModal';
 import MatchManagerModal from './components/MatchManagerModal';
+import MatchSelector from './components/MatchSelector';
 
 export default function App() {
   // Auth State
@@ -110,8 +111,6 @@ export default function App() {
           }
         } else {
           setMatches([]);
-          // Create an initial default match if none exists
-          createInitialMatch();
         }
       },
       (error) => {
@@ -121,31 +120,7 @@ export default function App() {
     );
 
     return () => unsubscribe();
-  }, [user, currentMatchId]);
-
-  // Initial match creator
-  const createInitialMatch = useCallback(async () => {
-    try {
-      const matchesRef = ref(db, 'matches');
-      const newMatchRef = push(matchesRef);
-      const initialData = {
-        homeTeam: 'Equipo Propio',
-        awayTeam: 'Rival FC',
-        category: 'Senior',
-        date: new Date().toISOString().split('T')[0],
-        homeScore: 0,
-        awayScore: 0,
-        period: '1T',
-        timerSeconds: 0,
-        currentPossession: 'propia',
-        createdAt: Date.now()
-      };
-      await set(newMatchRef, initialData);
-      setCurrentMatchId(newMatchRef.key);
-    } catch (err) {
-      console.error('Error creating initial match:', err);
-    }
-  }, []);
+  }, [user]);
 
   // 2. Firebase Listener: Active Match & Events
   useEffect(() => {
@@ -402,10 +377,26 @@ export default function App() {
       await remove(ref(db, `matches/${matchId}`));
       if (currentMatchId === matchId) {
         const remaining = matches.filter((m) => m.id !== matchId);
-        setCurrentMatchId(remaining.length > 0 ? remaining[0].id : null);
+        if (remaining.length > 0) {
+          setCurrentMatchId(remaining[0].id);
+        } else {
+          setCurrentMatchId(null);
+          setCurrentMatch(null);
+          setEvents([]);
+          setTimerSeconds(0);
+          setIsRunning(false);
+        }
       }
     } catch (err) {
       console.error('Error deleting match:', err);
+    }
+  };
+
+  const handleUpdateMatch = async (matchId, matchData) => {
+    try {
+      await update(ref(db, `matches/${matchId}`), matchData);
+    } catch (err) {
+      console.error('Error updating match:', err);
     }
   };
 
@@ -450,7 +441,17 @@ export default function App() {
         onLogout={handleLogout}
       />
 
-      {/* 2. Match Control Bar (Period, Stopwatch, Live Score) */}
+      {/* 2. Match Selector (elegir, crear, editar, eliminar partidos) */}
+      <MatchSelector
+        matches={matches}
+        currentMatchId={currentMatchId}
+        onSelectMatch={setCurrentMatchId}
+        onCreateMatch={handleCreateMatch}
+        onUpdateMatch={handleUpdateMatch}
+        onDeleteMatch={handleDeleteMatch}
+      />
+
+      {/* 3. Match Control Bar (Period, Stopwatch, Live Score) */}
       <MatchControlBar
         match={currentMatch}
         timerSeconds={timerSeconds}
@@ -463,14 +464,14 @@ export default function App() {
         onUpdateScore={handleUpdateScore}
       />
 
-      {/* 3. Possession Switcher Bar (Photo 2 Top Bar) */}
+      {/* 4. Possession Switcher Bar (Photo 2 Top Bar) */}
       <PossessionBar
         currentPossession={currentPossession}
         onChangePossession={handleChangePossession}
         possessionStats={possessionStats}
       />
 
-      {/* 4. Main Workspace */}
+      {/* 5. Main Workspace */}
       <main className="main-container">
         <section className="tagger-board">
           {activeTab === 'pro' ? (
@@ -481,6 +482,7 @@ export default function App() {
                 onTagEvent={handleTagEvent}
                 selectedPhase={selectedPhase}
                 setSelectedPhase={setSelectedPhase}
+                onOpenQuick={() => setActiveTab('quick')}
               />
 
               {/* Middle Column: Action Counters (Tiros, ABP, A favor/En contra, Lateral/Central) */}
@@ -518,7 +520,7 @@ export default function App() {
           )}
         </section>
 
-        {/* 5. Live Events Timeline Sidebar */}
+        {/* 6. Live Events Timeline Sidebar */}
         <TimelineSidebar
           events={events}
           onDeleteEvent={handleDeleteEvent}
@@ -526,7 +528,7 @@ export default function App() {
         />
       </main>
 
-      {/* 6. Modals */}
+      {/* 7. Modals */}
       <StatsModal
         isOpen={isStatsOpen}
         onClose={() => setIsStatsOpen(false)}
