@@ -20,6 +20,7 @@ export default function App() {
   const [saved, setSaved] = useState(false);
   const [matches, setMatches] = useState([]);
   const [editingId, setEditingId] = useState(null);
+  const [currentMatch, setCurrentMatch] = useState(null);
 
   useEffect(() => {
     if (!user) return;
@@ -42,6 +43,7 @@ export default function App() {
     try {
       const matchesRef = ref(db, 'matches');
       const newMatchRef = push(matchesRef);
+      const newId = newMatchRef.key;
       await set(newMatchRef, {
         homeTeam,
         awayTeam,
@@ -53,8 +55,7 @@ export default function App() {
       setHomeTeam('');
       setAwayTeam('');
       setMatchday('');
-      setSaved(true);
-      setTimeout(() => setSaved(false), 3000);
+      setCurrentMatch({ id: newId, homeTeam, awayTeam, matchday: Number(matchday), homeScore: 0, awayScore: 0 });
     } catch (err) {
       console.error('Error guardando partido:', err);
     }
@@ -92,6 +93,14 @@ export default function App() {
     setMatchday('');
   };
 
+  const handleOpenMatch = (match) => {
+    setCurrentMatch(match);
+  };
+
+  const handleBackToList = () => {
+    setCurrentMatch(null);
+  };
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -117,6 +126,79 @@ export default function App() {
     return <Login />;
   }
 
+  // Página del partido
+  if (currentMatch) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <header style={{
+          background: 'var(--bg-secondary)',
+          borderBottom: '1px solid var(--border-subtle)',
+          padding: '0.6rem 1.25rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          position: 'sticky',
+          top: 0,
+          zIndex: 50
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <button className="btn-sm btn-secondary" onClick={handleBackToList} style={{ fontSize: '1rem' }}>←</button>
+            <div className="brand-logo">FT</div>
+            <span style={{ fontWeight: 800, fontSize: '1.15rem' }}>FútbolTotal Análisis</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-secondary)' }}>
+              {user.email}
+            </span>
+            <button className="btn-sm btn-secondary" onClick={handleLogout}>Salir</button>
+          </div>
+        </header>
+
+        <main style={{ flex: 1, padding: '2rem', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '100%', maxWidth: '800px' }}>
+            {/* Info del partido */}
+            <div style={{
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-lg)',
+              padding: '1.5rem',
+              marginBottom: '2rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '2rem'
+            }}>
+              <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#38bdf8' }}>{currentMatch.homeTeam}</span>
+              <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#334155' }}>vs</span>
+              <span style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f87171' }}>{currentMatch.awayTeam}</span>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-muted)', background: 'var(--bg-secondary)', padding: '0.3rem 0.8rem', borderRadius: 'var(--radius-full)' }}>
+                Jornada {currentMatch.matchday}
+              </span>
+            </div>
+
+            {/* Hoja en blanco para construir */}
+            <div style={{
+              background: 'var(--bg-card)',
+              border: '1px solid var(--border-subtle)',
+              borderRadius: 'var(--radius-lg)',
+              padding: '3rem',
+              minHeight: '400px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--text-muted)',
+              fontSize: '1rem',
+              fontWeight: 600
+            }}>
+              Hoja en blanco — construye aquí tu análisis
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Lista de partidos
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <header style={{
@@ -206,12 +288,6 @@ export default function App() {
                 )}
               </div>
             </form>
-
-            {saved && (
-              <div style={{ marginTop: '1rem', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.4)', color: '#34d399', borderRadius: 'var(--radius-md)', padding: '0.5rem 0.75rem', fontSize: '0.8rem', fontWeight: 600, textAlign: 'center' }}>
-                Partido guardado correctamente
-              </div>
-            )}
           </div>
 
           {/* Lista de partidos */}
@@ -243,9 +319,14 @@ export default function App() {
                         J{m.matchday}
                       </span>
                     </div>
-                    <button className="btn-sm btn-secondary" onClick={() => handleEdit(m)}>
-                      Editar
-                    </button>
+                    <div style={{ display: 'flex', gap: '0.4rem' }}>
+                      <button className="btn-sm btn-primary" onClick={() => handleOpenMatch(m)}>
+                        Abrir
+                      </button>
+                      <button className="btn-sm btn-secondary" onClick={() => handleEdit(m)}>
+                        Editar
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
