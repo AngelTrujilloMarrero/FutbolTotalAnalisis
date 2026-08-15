@@ -284,32 +284,7 @@ export default function App() {
               {activeTab === 'finalizaciones' && (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
                   {/* Botón OCASION centrado arriba */}
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem' }}>
-                    <select
-                      value={selectedPlayer}
-                      onChange={(e) => setSelectedPlayer(e.target.value)}
-                      style={{
-                        background: 'var(--bg-secondary)',
-                        border: '1px solid var(--border-subtle)',
-                        borderRadius: '12px',
-                        color: '#ffffff',
-                        fontWeight: 900,
-                        fontSize: '0.95rem',
-                        padding: '0.8rem 1.5rem',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                        cursor: 'pointer',
-                        minWidth: '200px'
-                      }}
-                    >
-                      <option value="">SELECCIONAR JUGADOR</option>
-                      <option value="JUAN">JUAN</option>
-                      <option value="PEDRO">PEDRO</option>
-                      <option value="LUIS">LUIS</option>
-                      <option value="MILLA">MILLA</option>
-                      <option value="ALEXIS">ALEXIS</option>
-                      <option value="ANTONIO">ANTONIO</option>
-                    </select>
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <button
                       onClick={() => { setOcasionCount(ocasionCount + 1); setActiveTab('acciones'); }}
                       style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#f97316', color: '#ffffff', fontWeight: 900, fontSize: '0.95rem', padding: '0.8rem 1.5rem', borderRadius: '12px', minWidth: '250px', textTransform: 'uppercase', letterSpacing: '0.05em' }}
@@ -393,8 +368,32 @@ export default function App() {
                 </div>
               )}
               {activeTab === 'alineacion' && (
-                <div style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: 600 }}>
-                  GOLES — en construcción
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                  <select
+                    value={selectedPlayer}
+                    onChange={(e) => setSelectedPlayer(e.target.value)}
+                    style={{
+                      background: 'var(--bg-secondary)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '12px',
+                      color: '#ffffff',
+                      fontWeight: 900,
+                      fontSize: '0.95rem',
+                      padding: '0.8rem 1.5rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                      cursor: 'pointer',
+                      minWidth: '250px'
+                    }}
+                  >
+                    <option value="">SELECCIONAR JUGADOR</option>
+                    <option value="JUAN">JUAN</option>
+                    <option value="PEDRO">PEDRO</option>
+                    <option value="LUIS">LUIS</option>
+                    <option value="MILLA">MILLA</option>
+                    <option value="ALEXIS">ALEXIS</option>
+                    <option value="ANTONIO">ANTONIO</option>
+                  </select>
                 </div>
               )}
             </div>
